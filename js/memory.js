@@ -6,25 +6,41 @@ class MemoryGame {
   }
 
   shuffleCards() {
-    if(this.cards.length === 0) return undefined;
+    if (this.cards.length === 0) return undefined;
     const newShuffledGame = [];
 
     for (let i = 0; i < this.cards.length; i++) {
       let dice = Math.floor(Math.random() * this.cards.length);
-      newShuffledGame.push(this.cards[dice]);
+      if (!newShuffledGame.includes(this.cards[dice])) {
+        newShuffledGame.push(this.cards[dice]);
+      }
     }
-    // console.log(this.cards);
+
+    // console.log('hello',this.cards);
     // console.log(newShuffledGame);
-    return this.cards = newShuffledGame
+    return (this.cards = newShuffledGame);
   }
 
   checkIfPair(card1, card2) {
-    
-    // ... write your code here
+    this.pairsClicked++;
+
+    if (card1 === card2) {
+      this.pairsGuessed++;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   checkIfFinished() {
-    // ... write your code here
+    if (this.pairsGuessed === 0) return false;
+
+    console.log(this.cards.length);
+    if (this.pairsGuessed !== this.cards.length / 2) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 
